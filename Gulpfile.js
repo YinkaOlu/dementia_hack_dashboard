@@ -15,7 +15,7 @@ var gulp = require('gulp'),
 var path = {
     HTML: 'src/index.html',
     ALL: ['src/*.js', 'src/component/**/*.js', 'src/index.html', 'src/style/**/*.scss'],
-    JSX: ['src/app.jsx'],
+    JSX: ['src/index.jsx'],
     SASS: ['src/style/**/*.scss'],
     MINIFIED_OUT: 'build.min.js',
     DEST_CSS_BUILD: 'build/css',
