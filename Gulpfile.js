@@ -30,7 +30,7 @@ gulp.task('react', function(){
             extensions: ['.jsx']
         }))
         .pipe(uglify())
-        .pipe(rename('bundle.min.js'))
+        .pipe(rename(path.MINIFIED_OUT))
         .pipe(gulp.dest(path.DEST_JS_BUILD))
 });
 
