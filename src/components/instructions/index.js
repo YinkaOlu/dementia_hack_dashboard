@@ -2,55 +2,10 @@
 import React from 'react'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import FlatButton from 'material-ui/FlatButton'
+import DropDownMenu from 'material-ui/DropDownMenu'
+import MenuItem from 'material-ui/MenuItem'
 
-const testInstructions = [
-    {
-        createdAt: "Mon, March 4th, 2017",
-        title: "Random Instruction Test",
-        author: "Support Person One",
-        steps: [
-            {
-                title: "Step 1. Hammer Time",
-                body: "Dance Randomly like a fool",
-                media: {
-                    audio: "",
-                    video: ""
-                }
-            },
-            {
-                title: "Step 2. Hit the NaeNae",
-                body: "Do the whip, then the NaeNae",
-                media: {
-                    audio: "",
-                    video: ""
-                }
-            }
-        ]
-    },
-    {
-        createdAt: "Tues, March 5th, 2017",
-        title: "Random Instruction Test 2",
-        author: "Support Person Two",
-        steps: [
-            {
-                title: "Step 1. Hammer Time",
-                body: "Dance Randomly like a fool",
-                media: {
-                    audio: "",
-                    video: ""
-                }
-            },
-            {
-                title: "Step 2. Hit the NaeNae",
-                body: "Do the whip, then the NaeNae",
-                media: {
-                    audio: "",
-                    video: ""
-                }
-            }
-        ]
-    }
-];
+import testInstructions from "./testInstructions"
 
 
 export default class Instructions extends React.Component{
@@ -60,7 +15,15 @@ export default class Instructions extends React.Component{
     render(){
         return(
             <div>
-                <FlatButton label="Create New Instructions"/>
+                <div className="row">
+                    <FlatButton label="Create New Instructions"/>
+                </div>
+                <div className="row">
+                    <DropDownMenu>
+                        <MenuItem value={1} primaryText="Edit" />
+                        <MenuItem value={2} primaryText="Delete" />
+                    </DropDownMenu>
+                </div>
                 <Table>
                     <TableHeader>
                         <TableRow>
