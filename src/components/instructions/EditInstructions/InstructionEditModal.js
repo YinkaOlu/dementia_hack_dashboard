@@ -9,7 +9,7 @@ import {editInstruction} from '../../../instructionRedux/Actions'
 class BasicInstructionComponent extends React.Component{
     constructor(props){
         super(props);
-        this.state = {title: props.instruction.title, author: props.instruction.author, tags: props.instruction.tags,}
+        this.state = {title: props.instruction.title, author: props.instruction.author, tags: props.instruction.tags, instruction: props.instruction}
     }
     static defaultProps = {
         title: "New Title",
@@ -21,20 +21,38 @@ class BasicInstructionComponent extends React.Component{
         author: React.PropTypes.string,
         tags: React.PropTypes.string
     };
+    editStepTitle(e){
+        let newInstruction = this.state.instruction;
+        newInstruction.title = e.target.value;
+        this.setState({title: newInstruction.title, instruction: newInstruction});
+    }
+    editStepAuthor(e){
+        let newInstruction = this.state.instruction;
+        newInstruction.author = e.target.value;
+        this.setState({author: newInstruction.author, instruction: newInstruction});
+    }
+    editStepTags(e){
+        let newInstruction = this.state.instruction;
+        newInstruction.tags = e.target.value;
+        this.setState({tags: newInstruction.tags, instruction: newInstruction});
+    }
     render(){
         return(
             <div>
                 <TextField
                     defaultValue={this.state.title}
                     floatingLabelText="Instruction Title"
+                    onChange={this.editStepTitle.bind(this)}
                 /><br />
                 <TextField
                     defaultValue={this.state.author}
                     floatingLabelText="Author"
+                    onChange={this.editStepAuthor.bind(this)}
                 /><br />
                 <TextField
                     defaultValue={this.state.tags}
                     floatingLabelText="Instruction Tags"
+                    onChange={this.editStepTags.bind(this)}
                 /><br />
             </div>
         )
