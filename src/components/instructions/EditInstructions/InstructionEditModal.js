@@ -44,7 +44,7 @@ class BasicInstructionComponent extends React.Component{
 class StepInstructionComponent extends React.Component{
     constructor(props){
         super(props);
-        this.state = {steps: props.instruction.steps, stepIndex: 0, instruction: props.instruction}
+        this.state = {steps: props.instruction.steps, stepIndex: 0, instruction: props.instruction, selectedStep: null}
     }
     static defaultProps = {
         steps: [
@@ -58,11 +58,19 @@ class StepInstructionComponent extends React.Component{
             }
         ],
     };
+    static propTypes = {
+        dispatchInstruction: React.PropTypes.func
+    };
     editInstruction(){
         const self = this;
         const newInstruction = self.state.instruction;
         newInstruction.steps = self.state.steps;
-        self.dispatchInstruction(self.state.instruction.id, self.state.instruction);
+    }
+    editStepTitle(index, e){
+        this.setState({selectedStep: index})
+        let newSteps = this.state.steps;
+        newSteps[0].title = e.target.value
+        this.setState({steps: newSteps});
     }
     render(){
         return(
@@ -74,6 +82,7 @@ class StepInstructionComponent extends React.Component{
                                 <TextField
                                     defaultValue={step.title}
                                     floatingLabelText="Step Title"
+                                    onChange={this.editStepTitle.bind(this, index)}
                                 />
                                 <br />
                                 <TextField
@@ -85,7 +94,7 @@ class StepInstructionComponent extends React.Component{
                                     {step.media.audio.name}
                                 </Chip>
                                 <br />
-                                <FlatButton onClick={this.editInstruction.bind(this)} label="Save Changes"/>
+                                <FlatButton onClick={e=>this.props.dispatchInstruction(this.state.instruction.id, this.state.instruction)} label="Save Changes"/>
                                 <br />
                                 <Divider />
                             </div>
@@ -103,7 +112,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchInstruction: (id, message) => {
-            dispatch((id, message))
+            dispatch(editInstruction(id, message));
         }
     }
 }

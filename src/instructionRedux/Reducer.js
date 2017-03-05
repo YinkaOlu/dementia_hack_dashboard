@@ -62,15 +62,18 @@ const demoInstructions = [
 export default function instructions(state = demoInstructions, action) {
     switch (action.type){
         case EDIT_INSTRUCTION:
-            return state.map((instruction) =>
+            const newState = state.map((instruction) =>
             {
-                if(instruction.id = action.id){
+                if(instruction.id == action.id){
+                    console.log(action.editedInstruction);
                     return action.editedInstruction
                 }
                 else{
                     return instruction
                 }
             });
+            console.log(newState);
+            return newState;
         default:
             return state
     }
