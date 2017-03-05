@@ -36,12 +36,22 @@ export default class EditModal extends React.Component{
         self.setState({stepIndex: newState.stepIndex, finished: newState.finished});
     }
     backToStep(){
-        if(!this.state.finished && this.state.stepIndex == 1){
-            return this.setState({stepIndex: this.state.stepIndex--})
+        const self = this;
+        console.log('Here');
+        const newState = {
+            stepIndex: self.state.stepIndex,
+            finished: self.state.finished
+        };
+        if(this.state.stepIndex > 0)
+        {
+            console.log('Current Index: '+self.state.stepIndex);
+            newState.stepIndex = self.state.stepIndex - 1;
         }
-        if(this.state.finished && this.state.stepIndex == 2){
-            return this.setState({stepIndex: this.state.stepIndex--, finished: !this.state.finished})
+        else{
+            console.log('Start')
         }
+        console.log(newState.stepIndex + " changed index")
+        self.setState({stepIndex: newState.stepIndex, finished: newState.finished});
     }
     render(){
         return(
