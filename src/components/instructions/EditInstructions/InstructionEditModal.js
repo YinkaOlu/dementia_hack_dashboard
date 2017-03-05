@@ -2,8 +2,11 @@ import React from 'react'
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
 import Divider from 'material-ui/Divider';
+import FlatButton from 'material-ui/FlatButton'
+import {connect} from 'react-redux'
+import {editInstruction} from '../../../instructionRedux/Actions'
 
-export class BasicInstructionEdit extends React.Component{
+class BasicInstructionComponent extends React.Component{
     constructor(props){
         super(props);
         this.state = {title: props.instruction.title, author: props.instruction.author, tags: props.instruction.tags,}
@@ -38,10 +41,10 @@ export class BasicInstructionEdit extends React.Component{
     }
 }
 
-export class StepInstructionEdit extends React.Component{
+class StepInstructionComponent extends React.Component{
     constructor(props){
         super(props);
-        this.state = {steps: props.instruction.steps, stepIndex: 0}
+        this.state = {steps: props.instruction.steps, stepIndex: 0, instruction: props.instruction}
     }
     static defaultProps = {
         steps: [
@@ -55,6 +58,12 @@ export class StepInstructionEdit extends React.Component{
             }
         ],
     };
+    editInstruction(){
+        const self = this;
+        const newInstruction = self.state.instruction;
+        newInstruction.steps = self.state.steps;
+        self.dispatchInstruction(self.state.instruction.id, self.state.instruction);
+    }
     render(){
         return(
             <div>
@@ -76,6 +85,8 @@ export class StepInstructionEdit extends React.Component{
                                     {step.media.audio.name}
                                 </Chip>
                                 <br />
+                                <FlatButton onClick={this.editInstruction.bind(this)} label="Save Changes"/>
+                                <br />
                                 <Divider />
                             </div>
                             )
@@ -84,3 +95,18 @@ export class StepInstructionEdit extends React.Component{
         )
     }
 }
+
+function mapStateToProps(state) {
+    return { instructions: state.instructions }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchInstruction: (id, message) => {
+            dispatch((id, message))
+        }
+    }
+}
+
+export const StepInstructionEdit = connect(mapStateToProps, mapDispatchToProps)(StepInstructionComponent);
+export const BasicInstructionEdit = connect(mapStateToProps, mapDispatchToProps)(BasicInstructionComponent);
