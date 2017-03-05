@@ -32,12 +32,14 @@ class Instructions extends React.Component{
     render(){
         const editActions = [
             <FlatButton
+                className="goodButton"
                 label="Ok"
                 primary={true}
                 keyboardFocused={true}
                 onTouchTap={this.handleClose.bind(this)}
             />,
             <FlatButton
+                className="badButton"
                 label="Cancel"
                 primary={true}
                 keyboardFocused={true}
@@ -65,7 +67,7 @@ class Instructions extends React.Component{
                     <AddModal/>
                 </Dialog>
                 <div className="row">
-                    <FlatButton label="Create New Instructions" onClick={this.launchCreatePage.bind(this)}/>
+                    <FlatButton className="goodButton" label="Create New Instructions" onClick={this.launchCreatePage.bind(this)}/>
                 </div>
                 <Table multiSelectable={true}>
                     <TableHeader>
@@ -88,8 +90,8 @@ class Instructions extends React.Component{
                                     <TableRowColumn><em>{instruction.tags}</em></TableRowColumn>
                                     <TableRowColumn>
                                         <div className="row">
-                                            <FlatButton label="Edit" onClick={this.launchEditPage.bind(this, index)}/>
-                                            <FlatButton label="Delete"/>
+                                            <FlatButton className="goodButton" label="Edit" onClick={this.launchEditPage.bind(this, index)}/>
+                                            <FlatButton className="badButton" label="Delete"/>
                                         </div>
                                     </TableRowColumn>
                                 </TableRow>

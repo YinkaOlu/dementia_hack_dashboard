@@ -10,7 +10,7 @@ import underscore from 'underscore'
 class Dashboard extends React.Component{
     constructor(props){
         super(props);
-        this.state = {data: props.data, categories: [], subCategories: []}
+        this.state = {data: props.data, categories: [], subCategories: [], firstValue: 0, secondValue: 0}
     }
     componentDidMount(){
         const groupByCategory = underscore.groupBy(this.state.data, data =>
@@ -50,7 +50,7 @@ class Dashboard extends React.Component{
             chart.draw(data, options);
         }
     }
-    displayPieChart(e){
+    displayPieChart(e, index, value){
         const selectedCategory = e.target.innerHTML.trim()
         const self = this;
         const filtered = underscore.filter(this.state.data, data =>
@@ -62,7 +62,7 @@ class Dashboard extends React.Component{
             return data.subCategory
         });
         const subCategories = Object.keys(groupBySubCategory)
-        self.setState({subCategories: subCategories}, ()=>{
+        self.setState({subCategories: subCategories, firstValue: value}, ()=>{
             google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(drawChart);
         });
@@ -86,8 +86,9 @@ class Dashboard extends React.Component{
             chart.draw(data, options);
         }
     }
-    displayLineChart(e){
+    displayLineChart(e, index, value){
 
+        this.setState({secondValue: value})
         const selectedSubCategory = e.target.innerHTML.trim()
         const self = this;
         const filteredGroup = underscore.filter(self.state.data, data =>
@@ -134,19 +135,19 @@ class Dashboard extends React.Component{
                 <Card>
                     <div id="bargraph_div"></div>
                 </Card>
-                <SelectField onChange={this.displayPieChart.bind(this)}>
-                    {this.state.categories.map((category) =>
+                <SelectField onChange={this.displayPieChart.bind(this)} value={this.state.firstValue}>
+                    {this.state.categories.map((category, index) =>
                     {
-                        return (<MenuItem primaryText={category}/>)
+                        return (<MenuItem value={index} primaryText={category}/>)
                     })}
                 </SelectField>
                 <Card>
                     <div id="piegraph_div"></div>
                 </Card>
-                <SelectField onChange={this.displayLineChart.bind(this)}>
-                    {this.state.subCategories.map((category) =>
+                <SelectField onChange={this.displayLineChart.bind(this)} value={this.state.secondValue}>
+                    {this.state.subCategories.map((category, index) =>
                     {
-                        return (<MenuItem primaryText={category}/>)
+                        return (<MenuItem value={index} primaryText={category}/>)
                     })}
                 </SelectField>
                 <Card>

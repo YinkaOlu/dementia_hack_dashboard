@@ -119,7 +119,7 @@ class StepInstructionComponent extends React.Component{
                                     {step.media.audio.name}
                                 </Chip>
                                 <br />
-                                <FlatButton onClick={e=>this.props.dispatchInstruction(this.state.instruction.id, this.state.instruction)} label="Save Changes"/>
+                                <FlatButton className="goodButton" onClick={e=>this.props.dispatchInstruction(this.state.instruction.id, this.state.instruction)} label="Save Changes"/>
                                 <br />
                                 <Divider />
                             </div>

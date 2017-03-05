@@ -170,7 +170,6 @@ class StepInstructionComponent extends React.Component{
     }
     previewAudio(e){
         const blob = window.URL || window.webkitURL;
-        const reader = new FileReader();
         let file = e.target.files[0];
         console.log(file);
         const fileURL = blob.createObjectURL(file);
@@ -178,8 +177,6 @@ class StepInstructionComponent extends React.Component{
         this.setState({
             inputAudioUrl: fileURL
         });
-
-
     }
     render(){
         return(
@@ -219,8 +216,11 @@ class StepInstructionComponent extends React.Component{
                         </CardText>
                     </Card>
 
-                    <FlatButton label="Save Step" onClick={this.addAnotherStep.bind(this)} />
+                    <br />
+                    <FlatButton className="goodButton" label="Save Step" onClick={this.addAnotherStep.bind(this)} />
                     <Divider />
+                    <br />
+                    <br />
                 </div>
             </div>
         )

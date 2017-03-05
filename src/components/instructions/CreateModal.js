@@ -65,7 +65,7 @@ class CreateModal extends React.Component{
                         <StepLabel>Basic Instruction Info</StepLabel>
                         <StepContent>
                             <BasicInstructionCreate/>
-                            <FlatButton label="Go To Step 2" onClick={this.goToStep.bind(this)}/>
+                            <FlatButton className="goodButton" label="Go To Step 2" onClick={this.goToStep.bind(this)}/>
                         </StepContent>
                     </Step>
 
@@ -73,8 +73,8 @@ class CreateModal extends React.Component{
                         <StepLabel>Edit Steps Details</StepLabel>
                         <StepContent>
                             <StepInstructionCreate/>
-                            <FlatButton label="Back To Step 1" onClick={this.backToStep.bind(this)}/>
-                            <FlatButton label="Go To Final Step" onClick={this.goToStep.bind(this)}/>
+                            <FlatButton className="badButton" label="Back To Step 1" onClick={this.backToStep.bind(this)}/>
+                            <FlatButton className="goodButton" label="Go To Final Step" onClick={this.goToStep.bind(this)}/>
                         </StepContent>
                     </Step>
 
@@ -82,8 +82,8 @@ class CreateModal extends React.Component{
                         <StepLabel>Confirm Details</StepLabel>
                         <StepContent>
                             <p>Do you want to create these instructions?</p>
-                            <FlatButton label="Back To Step 2" onClick={this.backToStep.bind(this)}/>
-                            <FlatButton label="Confirm" onClick={this.goToStep.bind(this)}/>
+                            <FlatButton className="badButton" label="Back To Step 2" onClick={this.backToStep.bind(this)}/>
+                            <FlatButton className="goodButton" label="Confirm" onClick={this.goToStep.bind(this)}/>
                         </StepContent>
                     </Step>
                 </Stepper>

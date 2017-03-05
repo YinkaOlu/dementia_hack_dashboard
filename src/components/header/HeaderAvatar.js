@@ -23,7 +23,7 @@ class HeaderAvatar extends React.Component{
                         {this.generateGreeting()}
                     </Chip>}/>
                     <CardActions>
-                        <FlatButton label="settings"/>
+                        <FlatButton className="goodButton" label="settings"/>
                         <FlatButton label="logout"/>
                     </CardActions>
                 </Card>
