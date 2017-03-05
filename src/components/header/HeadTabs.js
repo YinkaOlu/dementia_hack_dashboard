@@ -2,6 +2,7 @@
 import React from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Instructions from "../instructions/index"
+import Dashboard from "../dashboard/index"
 
 class HeadToolBar extends React.Component{
     constructor(props){
@@ -12,7 +13,7 @@ class HeadToolBar extends React.Component{
             <div>
                 <Tabs>
                     <Tab label="Dashboard">
-
+                        <Dashboard/>
                     </Tab>
                     <Tab label="Instructions">
                         <Instructions/>
