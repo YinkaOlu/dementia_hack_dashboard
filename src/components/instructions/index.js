@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Dialog from 'material-ui/Dialog'
+import EditModal from './EditModal'
 
 import testInstructions from "./testInstructions"
 
@@ -45,7 +46,7 @@ export default class Instructions extends React.Component{
                     modal={false}
                     open={this.state.showModal}
                 >
-                    <h1>Edit</h1>
+                    <EditModal/>
                 </Dialog>
                 <div className="row">
                     <FlatButton label="Create New Instructions"/>
