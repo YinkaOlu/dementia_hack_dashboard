@@ -165,11 +165,31 @@ class StepInstructionComponent extends React.Component{
                     />
                     <br />
                     <Chip>
-                        Add Media
+                        Add Audio
                     </Chip>
                     <br />
                     <input id="imageUpload" type="file" name="upload" accept="image/*"/>
                     <br />
+                    <Divider />
+
+                    <br />
+                    <Chip>
+                        Add Video
+                    </Chip>
+                    <br />
+                    <input id="imageUpload" type="file" name="upload" accept="video/*"/>
+                    <br />
+                    <Divider />
+
+                    <br />
+                    <Chip>
+                        Add Picture
+                    </Chip>
+                    <br />
+                    <input id="imageUpload" type="file" name="upload" accept="audio/*"/>
+                    <br />
+                    <Divider />
+
                     <FlatButton label="Save Step" onClick={this.addAnotherStep.bind(this)} />
                     <Divider />
                 </div>
