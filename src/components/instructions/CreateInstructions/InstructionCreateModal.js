@@ -5,7 +5,7 @@ import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton'
 import {connect} from 'react-redux'
 import {addInstruction} from '../../../instructionRedux/Actions'
-import {Card} from 'material-ui/Card'
+import {Card, CardHeader, CardText, CardMedia} from 'material-ui/Card'
 
 const emptyInstruction = {
         "createdAt": new Date().toISOString(),
@@ -197,22 +197,27 @@ class StepInstructionComponent extends React.Component{
                         floatingLabelText="Step Message"
                         onChange={this.createStepMessage.bind(this.files)}
                     />
-                    <br />
-                    <br />
-                    {this.state.imagePreviewUrl ? <img src={this.state.imagePreviewUrl} width={100}/> : <em>No Image</em>}
-                    <br />
-                    <input id="imageUpload" type="file" name="picUpload" accept="image/*" onChange={this.previewImage.bind(this)}/>
-                    <br />
-                    <Divider />
 
-                    <br />
+                    <Card>
+                        <CardHeader
+                            title="Audio Section"/>
+                        <CardMedia>
+                            {this.state.inputAudioUrl ? <audio src={this.state.inputAudioUrl} controls/>: <em>No Audio</em>}
+                        </CardMedia>
+                        <CardText><input id="imageUpload" type="file" name="audioUpload" onChange={this.previewAudio.bind(this)}/>
+                        </CardText>
+                    </Card>
 
-                    <br />
-                    {this.state.inputAudioUrl ? <audio src={this.state.inputAudioUrl} controls/>: <em>No Audio</em>}
-                    <br />
-                    <input id="imageUpload" type="file" name="audioUpload" onChange={this.previewAudio.bind(this)}/>
-                    <br />
-                    <Divider />
+                    <Card>
+                        <CardHeader
+                        title="Image Section"/>
+                        <CardMedia>
+                            {this.state.imagePreviewUrl ? <img src={this.state.imagePreviewUrl}/> : <em>No Image</em>}
+                        </CardMedia>
+                        <CardText>
+                            <input id="imageUpload" type="file" name="picUpload" accept="image/*" onChange={this.previewImage.bind(this)}/>
+                        </CardText>
+                    </Card>
 
                     <FlatButton label="Save Step" onClick={this.addAnotherStep.bind(this)} />
                     <Divider />
