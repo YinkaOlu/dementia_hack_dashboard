@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import {addInstruction} from '../../../instructionRedux/Actions'
 
 const emptyInstruction = {
-        "createdAt": "",
+        "createdAt": new Date().toISOString(),
         "title": "",
         "author": "",
         "tags": "",

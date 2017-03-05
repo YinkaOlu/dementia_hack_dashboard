@@ -23,7 +23,8 @@ class Instructions extends React.Component{
         this.setState({showCreateModal: true});
     }
     handleClose(){
-        this.setState({showEditModal: false, showCreateModal: false})
+        console.log(this.props.instructions)
+        this.setState({showEditModal: false, showCreateModal: false, instructions: this.props.instructions})
     }
     deleteInstruction(){
         alert('Delete Page')
