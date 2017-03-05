@@ -6,15 +6,17 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Dialog from 'material-ui/Dialog'
 import EditModal from './EditModal'
+import {connect} from 'react-redux'
 
 import testInstructions from "./testInstructions"
 
-export default class Instructions extends React.Component{
+class Instructions extends React.Component{
     constructor(props){
         super(props);
-        this.state = {instructions: props.instructions, showModal: false}
+        this.state = {instructions: props.instructions, showModal: false, storeState: props.storeState}
     }
     launchEditPage(){
+        console.log(this.props.storeState);
         this.setState({showModal: true});
     }
     handleClose(){
@@ -84,3 +86,7 @@ export default class Instructions extends React.Component{
         )
     }
 }
+function mapStateToProps(state) {
+    return { storeState: state }
+}
+export default connect(mapStateToProps)(Instructions);
