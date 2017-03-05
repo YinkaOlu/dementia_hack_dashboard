@@ -61,7 +61,7 @@ const demoInstructions = [
         "id": 3,
         "createdAt": "Tues, March 1th, 2017",
         "title": "Random Instruction Test 3",
-        "author": "Support Person One",
+        "author": "Support Person One90 ",
         "tags": "dances",
         "steps": [
             {

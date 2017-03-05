@@ -296,13 +296,13 @@ const sampleQuesitons =[
 const initialState = seedResults().concat(seedResults()).concat(seedResults())
 function seedResults() {
     const data = [];
-    const seedSize = 10;
+    const seedSize = 1000;
     for(let i = 0; i < seedSize; i++){
         const randomNum = getRandom();
         const randomTask = jQuery.extend(true, {}, sampleQuesitons[getRandom()]);
 
         randomTask.failed = (Math.floor(getRandom()) % 2 == 0);
-        const fullDate = new Date(new Date().getTime() - (Math.floor(90*(Math.floor(Math.random()*sampleQuesitons.length)/sampleQuesitons.length)) * (1000 * 60 * 60 * 24)));
+        const fullDate = new Date(new Date().getTime() - (Math.floor(900*(Math.floor(Math.random()*sampleQuesitons.length)/sampleQuesitons.length)) * (1000 * 60 * 60 * 24)));
         const dateStr = `${fullDate.getMonth()}/${fullDate.getUTCDate()}/${fullDate.getUTCFullYear()}`
         randomTask.date = dateStr;
         data.push(randomTask)

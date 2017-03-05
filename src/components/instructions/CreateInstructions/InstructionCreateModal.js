@@ -91,7 +91,13 @@ class BasicInstructionComponent extends React.Component{
 class StepInstructionComponent extends React.Component{
     constructor(props){
         super(props);
-        this.state = {currentStep: emptyStep, steps: emptyInstruction.steps, createIndex: 0, instruction: emptyInstruction}
+        this.state = {file: null,
+            currentStep: emptyStep,
+            steps: emptyInstruction.steps,
+            createIndex: 0,
+            instruction: emptyInstruction,
+            imagePreviewUrl: null
+        }
     }
     static defaultProps = {
         steps: [
@@ -147,6 +153,19 @@ class StepInstructionComponent extends React.Component{
             self.props.dispatchInstruction(this.state.instruction);
         });
     }
+    previewImage(e){
+        const reader = new FileReader();
+        let file = e.target.files[0];
+
+        reader.onloadend = () => {
+            this.setState({
+                file: file,
+                imagePreviewUrl: reader.result
+            });
+        }
+
+        reader.readAsDataURL(file)
+    }
     render(){
         return(
             <div>
@@ -161,14 +180,15 @@ class StepInstructionComponent extends React.Component{
                     <TextField
                         defaultValue={this.state.currentStep.message}
                         floatingLabelText="Step Message"
-                        onChange={this.createStepMessage.bind(this)}
+                        onChange={this.createStepMessage.bind(this.files)}
                     />
                     <br />
                     <Chip>
-                        Add Audio
+                        Add Image
                     </Chip>
                     <br />
-                    <input id="imageUpload" type="file" name="upload" accept="image/*"/>
+                    {this.state.imagePreviewUrl ? <img src={this.state.imagePreviewUrl} width={100}/> : <div></div>}
+                    <input id="imageUpload" type="file" name="upload" accept="image/*" onChange={this.previewImage.bind(this)}/>
                     <br />
                     <Divider />
 
@@ -183,7 +203,7 @@ class StepInstructionComponent extends React.Component{
 
                     <br />
                     <Chip>
-                        Add Picture
+                        Add Audio
                     </Chip>
                     <br />
                     <input id="imageUpload" type="file" name="upload" accept="audio/*"/>
