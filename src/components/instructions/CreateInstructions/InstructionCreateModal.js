@@ -5,6 +5,7 @@ import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton'
 import {connect} from 'react-redux'
 import {addInstruction} from '../../../instructionRedux/Actions'
+import {Card} from 'material-ui/Card'
 
 const emptyInstruction = {
         "createdAt": new Date().toISOString(),
@@ -96,7 +97,8 @@ class StepInstructionComponent extends React.Component{
             steps: emptyInstruction.steps,
             createIndex: 0,
             instruction: emptyInstruction,
-            imagePreviewUrl: null
+            imagePreviewUrl: null,
+            inputAudioUrl: null
         }
     }
     static defaultProps = {
@@ -166,6 +168,19 @@ class StepInstructionComponent extends React.Component{
 
         reader.readAsDataURL(file)
     }
+    previewAudio(e){
+        const blob = window.URL || window.webkitURL;
+        const reader = new FileReader();
+        let file = e.target.files[0];
+        console.log(file);
+        const fileURL = blob.createObjectURL(file);
+        console.log(fileURL);
+        this.setState({
+            inputAudioUrl: fileURL
+        });
+
+
+    }
     render(){
         return(
             <div>
@@ -183,30 +198,19 @@ class StepInstructionComponent extends React.Component{
                         onChange={this.createStepMessage.bind(this.files)}
                     />
                     <br />
-                    <Chip>
-                        Add Image
-                    </Chip>
                     <br />
-                    {this.state.imagePreviewUrl ? <img src={this.state.imagePreviewUrl} width={100}/> : <div></div>}
-                    <input id="imageUpload" type="file" name="upload" accept="image/*" onChange={this.previewImage.bind(this)}/>
+                    {this.state.imagePreviewUrl ? <img src={this.state.imagePreviewUrl} width={100}/> : <em>No Image</em>}
+                    <br />
+                    <input id="imageUpload" type="file" name="picUpload" accept="image/*" onChange={this.previewImage.bind(this)}/>
                     <br />
                     <Divider />
 
                     <br />
-                    <Chip>
-                        Add Video
-                    </Chip>
-                    <br />
-                    <input id="imageUpload" type="file" name="upload" accept="video/*"/>
-                    <br />
-                    <Divider />
 
                     <br />
-                    <Chip>
-                        Add Audio
-                    </Chip>
+                    {this.state.inputAudioUrl ? <audio src={this.state.inputAudioUrl} controls/>: <em>No Audio</em>}
                     <br />
-                    <input id="imageUpload" type="file" name="upload" accept="audio/*"/>
+                    <input id="imageUpload" type="file" name="audioUpload" onChange={this.previewAudio.bind(this)}/>
                     <br />
                     <Divider />
 
