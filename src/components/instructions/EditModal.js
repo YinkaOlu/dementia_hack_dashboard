@@ -7,6 +7,7 @@ import {
     StepContent,
 } from 'material-ui/Stepper';
 import FlatButton from 'material-ui/FlatButton';
+import {BasicInstructionEdit, StepInstructionEdit} from './EditInstructions/InstructionEditModal'
 
 export default class EditModal extends React.Component{
     constructor(props){
@@ -32,7 +33,7 @@ export default class EditModal extends React.Component{
         else{
             console.log('Finished')
         }
-        console.log(newState.stepIndex + " changed index")
+        console.log(newState.stepIndex + " changed index");
         self.setState({stepIndex: newState.stepIndex, finished: newState.finished});
     }
     backToStep(){
@@ -50,7 +51,7 @@ export default class EditModal extends React.Component{
         else{
             console.log('Start')
         }
-        console.log(newState.stepIndex + " changed index")
+        console.log(newState.stepIndex + " changed index");
         self.setState({stepIndex: newState.stepIndex, finished: newState.finished});
     }
     render(){
@@ -60,7 +61,7 @@ export default class EditModal extends React.Component{
                     <Step>
                         <StepLabel>Edit Basic Instruction Info</StepLabel>
                         <StepContent>
-                            <p>Step 1</p>
+                            <BasicInstructionEdit/>
                             <FlatButton label="Go To Step 2" onClick={this.goToStep.bind(this)}/>
                         </StepContent>
                     </Step>
@@ -68,7 +69,7 @@ export default class EditModal extends React.Component{
                     <Step>
                         <StepLabel>Edit Steps Details</StepLabel>
                         <StepContent>
-                            <p>Step 2</p>
+                            <StepInstructionEdit/>
                             <FlatButton label="Back To Step 1" onClick={this.backToStep.bind(this)}/>
                             <FlatButton label="Go To Final Step" onClick={this.goToStep.bind(this)}/>
                         </StepContent>
