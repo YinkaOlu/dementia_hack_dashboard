@@ -125,7 +125,9 @@ class StepInstructionComponent extends React.Component{
     }
     addAnotherStep(){
         const self = this;
-        emptyInstruction.steps.push(self.state.currentStep);
+        const newStep = self.state.currentStep;
+        newStep.media.picture.data = document.getElementById("imageUpload").value;
+        emptyInstruction.steps.push(newStep);
         console.log(emptyInstruction);
         const newIndex = self.state.createIndex + 1;
         this.setState({steps: emptyInstruction.steps,
@@ -166,8 +168,9 @@ class StepInstructionComponent extends React.Component{
                         Add Media
                     </Chip>
                     <br />
-                    <FlatButton onClick={this.addAnotherStep.bind(this)} label="Save Changes"/>
+                    <input id="imageUpload" type="file" name="upload" accept="image/*"/>
                     <br />
+                    <FlatButton label="Save Step" onClick={this.addAnotherStep.bind(this)} />
                     <Divider />
                 </div>
             </div>
