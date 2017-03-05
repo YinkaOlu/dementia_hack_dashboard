@@ -16,7 +16,8 @@ const demoInstructions = [
                     "audio": "",
                     "video": "",
                     "picture": ""
-                }
+                },
+                "failureCount": 100
             },
             {
                 "title": "Step 2. Hit the NaeNae",
@@ -25,7 +26,8 @@ const demoInstructions = [
                     "audio": "",
                     "video": "",
                     "picture": ""
-                }
+                },
+                "failureCount": 200
             }
         ]
     },

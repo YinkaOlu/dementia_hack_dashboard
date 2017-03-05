@@ -8,14 +8,16 @@ import {
 } from 'material-ui/Stepper';
 import FlatButton from 'material-ui/FlatButton';
 import {BasicInstructionEdit, StepInstructionEdit} from './EditInstructions/InstructionEditModal'
+import {connect} from 'react-redux'
 
-export default class EditModal extends React.Component{
+class EditModal extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             instruction: props.instruction,
             stepIndex: 0,
-            finished: false}
+            finished: false
+        }
     }
     goToStep(){
         const self = this;
@@ -57,11 +59,12 @@ export default class EditModal extends React.Component{
     render(){
         return(
             <div>
+                <h1>{this.state.instruction.title}</h1>
                 <Stepper activeStep={this.state.stepIndex} orientation="vertical">
                     <Step>
                         <StepLabel>Edit Basic Instruction Info</StepLabel>
                         <StepContent>
-                            <BasicInstructionEdit/>
+                            <BasicInstructionEdit instruction={this.state.instruction}/>
                             <FlatButton label="Go To Step 2" onClick={this.goToStep.bind(this)}/>
                         </StepContent>
                     </Step>
@@ -69,7 +72,7 @@ export default class EditModal extends React.Component{
                     <Step>
                         <StepLabel>Edit Steps Details</StepLabel>
                         <StepContent>
-                            <StepInstructionEdit/>
+                            <StepInstructionEdit instruction={this.state.instruction}/>
                             <FlatButton label="Back To Step 1" onClick={this.backToStep.bind(this)}/>
                             <FlatButton label="Go To Final Step" onClick={this.goToStep.bind(this)}/>
                         </StepContent>
@@ -88,3 +91,9 @@ export default class EditModal extends React.Component{
         )
     }
 }
+
+function mapStateToProps(state) {
+    return { instructions: state.instructions }
+}
+
+export default connect(mapStateToProps)(EditModal)

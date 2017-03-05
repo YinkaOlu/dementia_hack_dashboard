@@ -11,11 +11,12 @@ import {connect} from 'react-redux'
 class Instructions extends React.Component{
     constructor(props){
         super(props);
-        this.state = {instructions: props.instructions, showModal: false, storeState: props.storeState}
+        this.state = {instructions: props.instructions, showModal: false, storeState: props.storeState, instruction: null}
     }
-    launchEditPage(){
-        console.log(this.props.storeState);
-        this.setState({showModal: true});
+    launchEditPage(index){
+        const self = this;
+        console.log(self.state.instructions[index]);
+        this.setState({instruction: self.state.instructions[index], showModal: true});
     }
     handleClose(){
         this.setState({showModal: false})
@@ -46,16 +47,10 @@ class Instructions extends React.Component{
                     modal={false}
                     open={this.state.showModal}
                 >
-                    <EditModal/>
+                    <EditModal instruction={this.state.instruction}/>
                 </Dialog>
                 <div className="row">
                     <FlatButton label="Create New Instructions"/>
-                </div>
-                <div className="row">
-                    <DropDownMenu>
-                        <MenuItem value={1} primaryText="Edit" onTouchTap={this.launchEditPage.bind(this)}/>
-                        <MenuItem value={2} primaryText="Delete" onTouchTap={this.deleteInstruction.bind(this)}/>
-                    </DropDownMenu>
                 </div>
                 <Table multiSelectable={true}>
                     <TableHeader>
@@ -64,6 +59,7 @@ class Instructions extends React.Component{
                             <TableHeaderColumn>Title</TableHeaderColumn>
                             <TableHeaderColumn>Author</TableHeaderColumn>
                             <TableHeaderColumn>Tags</TableHeaderColumn>
+                            <TableHeaderColumn>Actions</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -71,10 +67,16 @@ class Instructions extends React.Component{
                         {
                             return(
                                 <TableRow>
-                                    <TableRowColumn>{index + 1}</TableRowColumn>
+                                    <TableRowColumn>{instruction.createdAt}</TableRowColumn>
                                     <TableRowColumn>{instruction.title}</TableRowColumn>
                                     <TableRowColumn>{instruction.author}</TableRowColumn>
                                     <TableRowColumn><em>{instruction.tags}</em></TableRowColumn>
+                                    <TableRowColumn>
+                                        <div className="row">
+                                            <FlatButton label="Edit" onClick={this.launchEditPage.bind(this, index)}/>
+                                            <FlatButton label="Delete"/>
+                                        </div>
+                                    </TableRowColumn>
                                 </TableRow>
                             )
                         })}
