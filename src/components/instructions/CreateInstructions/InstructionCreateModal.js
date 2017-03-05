@@ -30,23 +30,39 @@ class BasicInstructionComponent extends React.Component{
         this.state = {
             title: "",
             author: "",
-            tags: ""
+            tags: "",
+            instruction: emptyInstruction
         };
     }
     createStepTitle(e){
         let newInstruction = this.state.instruction;
         newInstruction.title = e.target.value;
+        console.log(e.target.value)
         this.setState({title: newInstruction.title, instruction: newInstruction});
     }
     createStepAuthor(e){
         let newInstruction = this.state.instruction;
         newInstruction.author = e.target.value;
+        console.log(e.target.value)
         this.setState({author: newInstruction.author, instruction: newInstruction});
     }
     createStepTags(e){
         let newInstruction = this.state.instruction;
         newInstruction.tags = e.target.value;
+        console.log(e.target.value)
         this.setState({tags: newInstruction.tags, instruction: newInstruction});
+    }
+    saveAddition(){
+        const self = this;
+        emptyInstruction.title = self.state.title;
+        emptyInstruction.author = self.state.author;
+        emptyInstruction.tags = self.state.tags;
+        emptyInstruction.id = Math.floor(Math.random()*10000000000000000);
+        self.setState({instruction: emptyInstruction, currentStep: null}, ()=>
+        {
+            console.log(self.state.instruction)
+            self.props.dispatchInstruction(this.state.instruction);
+        });
     }
     render(){
         return(
@@ -66,6 +82,7 @@ class BasicInstructionComponent extends React.Component{
                     defaultValue={this.state.tags}
                     onChange={this.createStepTags.bind(this)}
                 /><br />
+                <FlatButton onClick={this.saveAddition.bind(this)} label="Save Changes"/>
             </div>
         )
     }
@@ -74,7 +91,7 @@ class BasicInstructionComponent extends React.Component{
 class StepInstructionComponent extends React.Component{
     constructor(props){
         super(props);
-        this.state = {steps: emptyInstruction.steps, createIndex: 0, instruction: emptyInstruction}
+        this.state = {currentStep: emptyStep, steps: emptyInstruction.steps, createIndex: 0, instruction: emptyInstruction}
     }
     static defaultProps = {
         steps: [
@@ -97,50 +114,62 @@ class StepInstructionComponent extends React.Component{
         newInstruction.steps = self.state.steps;
     }
     createStepTitle(e){
-        let newSteps = this.state.steps;
-        newSteps[this.state.createIndex].title = e.target.value;
-        this.setState({steps: newSteps});
+        let newStep = this.state.currentStep;
+        newStep.title = e.target.value;
+        this.setState({currentStep: newStep});
     }
     createStepMessage(e){
-        let newSteps = this.state.steps;
-        newSteps[this.state.createIndex].message = e.target.value;
-        this.setState({steps: newSteps});
+        let newStep = this.state.currentStep;
+        newStep.message = e.target.value;
+        this.setState({currentStep: newStep});
     }
     addAnotherStep(){
-        emptyInstruction.steps = this.state.steps;
-        const newIndex = this.state.createIndex + 1;
-        this.setState({steps: emptyInstruction.steps, instruction: emptyInstruction, currentStep: null});
-        this.props.addInstruction(this.state.instruction);
+        const self = this;
+        emptyInstruction.steps.push(self.state.currentStep);
+        console.log(emptyInstruction);
+        const newIndex = self.state.createIndex + 1;
+        this.setState({steps: emptyInstruction.steps,
+            instruction: emptyInstruction,
+            currentStep: {
+                "title": "",
+                "message": "",
+                "media": {
+                    "audio": {name: "", data: null},
+                    "video": {name: "", data: null},
+                    "picture": {name: "", data: null}
+                },
+                "failureCount": 0
+            },
+        createIndex: newIndex}, ()=>
+        {
+            self.props.dispatchInstruction(this.state.instruction);
+        });
     }
     render(){
         return(
             <div>
-                {this.state.steps.map((step, index)=>{
-                    return(
-                        <div>
-                            <br />
-                            <TextField
-                                defaultValue={step.title}
-                                floatingLabelText="Step Title"
-                                onChange={this.createStepTitle.bind(this)}
-                            />
-                            <br />
-                            <TextField
-                                defaultValue={step.message}
-                                floatingLabelText="Step Message"
-                                onChange={this.createStepMessage.bind(this)}
-                            />
-                            <br />
-                            <Chip>
-                                {step.media.audio.name}
-                            </Chip>
-                            <br />
-                            <FlatButton onClick={e=>this.props.dispatchInstruction(this.state.instruction.id, this.state.instruction)} label="Save Changes"/>
-                            <br />
-                            <Divider />
-                        </div>
-                    )
-                })}
+                <div>
+                    <br />
+                    <TextField
+                        defaultValue={this.state.currentStep.title}
+                        floatingLabelText="Step Title"
+                        onChange={this.createStepTitle.bind(this)}
+                    />
+                    <br />
+                    <TextField
+                        defaultValue={this.state.currentStep.message}
+                        floatingLabelText="Step Message"
+                        onChange={this.createStepMessage.bind(this)}
+                    />
+                    <br />
+                    <Chip>
+                        Add Media
+                    </Chip>
+                    <br />
+                    <FlatButton onClick={this.addAnotherStep.bind(this)} label="Save Changes"/>
+                    <br />
+                    <Divider />
+                </div>
             </div>
         )
     }
@@ -152,8 +181,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchInstruction: (id, message) => {
-            dispatch(addInstruction(id, message));
+        dispatchInstruction: (message) => {
+            dispatch(addInstruction(message));
         }
     }
 }

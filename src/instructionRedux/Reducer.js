@@ -1,5 +1,6 @@
 'use strict';
 import {EDIT_INSTRUCTION, ADD_INSTRUCTION} from "./ActionTypes"
+import underscore from "underscore"
 
 const demoInstructions = [
     {
@@ -61,9 +62,27 @@ const demoInstructions = [
 export default function instructions(state = demoInstructions, action) {
     switch (action.type){
         case ADD_INSTRUCTION:
-            const addedState = [...state, action.addedInstruction];
-            console.log(addedState);
-            return addedState;
+            let found = false;
+            underscore.each(state, instruction =>{
+                if (action.addedInstruction.id == instruction.id){
+                    found = true;
+                }
+            });
+            if(found){
+                return state.map((instruction) =>
+                {
+                    if(instruction.id == action.addedInstruction.id){
+                        console.log(action.addedInstruction);
+                        return action.addedInstruction
+                    }
+                    else{
+                        return instruction
+                    }
+                });
+            }
+            else{
+                return [...state, action.addedInstruction];
+            }
         case EDIT_INSTRUCTION:
             const newState = state.map((instruction) =>
             {

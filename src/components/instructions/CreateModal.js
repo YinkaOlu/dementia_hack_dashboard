@@ -72,6 +72,7 @@ class CreateModal extends React.Component{
                     <Step>
                         <StepLabel>Edit Steps Details</StepLabel>
                         <StepContent>
+                            <StepInstructionCreate/>
                             <FlatButton label="Back To Step 1" onClick={this.backToStep.bind(this)}/>
                             <FlatButton label="Go To Final Step" onClick={this.goToStep.bind(this)}/>
                         </StepContent>
