@@ -6,20 +6,24 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Dialog from 'material-ui/Dialog'
 import EditModal from './EditModal'
+import AddModal from './CreateModal'
 import {connect} from 'react-redux'
 
 class Instructions extends React.Component{
     constructor(props){
         super(props);
-        this.state = {instructions: props.instructions, showModal: false, storeState: props.storeState, instruction: null}
+        this.state = {instructions: props.instructions, showCreateModal: false, showEditModal: false, storeState: props.storeState, instruction: null}
     }
     launchEditPage(index){
         const self = this;
         console.log(self.state.instructions[index]);
-        this.setState({instruction: self.state.instructions[index], showModal: true});
+        this.setState({instruction: self.state.instructions[index], showEditModal: true});
+    }
+    launchCreatePage(){
+        this.setState({showCreateModal: true});
     }
     handleClose(){
-        this.setState({showModal: false})
+        this.setState({showEditModal: false, showCreateModal: false})
     }
     deleteInstruction(){
         alert('Delete Page')
@@ -46,12 +50,21 @@ class Instructions extends React.Component{
                     actions={editActions}
                     modal={false}
                     autoScrollBodyContent={true}
-                    open={this.state.showModal}
+                    open={this.state.showEditModal}
                 >
                     <EditModal instruction={this.state.instruction}/>
                 </Dialog>
+                <Dialog
+                    title="Create Instructions"
+                    actions={editActions}
+                    modal={false}
+                    autoScrollBodyContent={true}
+                    open={this.state.showCreateModal}
+                >
+                    <AddModal/>
+                </Dialog>
                 <div className="row">
-                    <FlatButton label="Create New Instructions"/>
+                    <FlatButton label="Create New Instructions" onClick={this.launchCreatePage.bind(this)}/>
                 </div>
                 <Table multiSelectable={true}>
                     <TableHeader>

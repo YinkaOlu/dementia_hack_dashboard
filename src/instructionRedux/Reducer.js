@@ -1,6 +1,5 @@
 'use strict';
-import {EDIT_INSTRUCTION} from "./ActionTypes"
-import {editInstruction} from "./Actions"
+import {EDIT_INSTRUCTION, ADD_INSTRUCTION} from "./ActionTypes"
 
 const demoInstructions = [
     {
@@ -61,6 +60,10 @@ const demoInstructions = [
 
 export default function instructions(state = demoInstructions, action) {
     switch (action.type){
+        case ADD_INSTRUCTION:
+            const addedState = [...state, action.addedInstruction];
+            console.log(addedState);
+            return addedState;
         case EDIT_INSTRUCTION:
             const newState = state.map((instruction) =>
             {
