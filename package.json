@@ -24,6 +24,7 @@
     "material-ui": "^0.17.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-modal": "^1.7.1",
     "react-tap-event-plugin": "^2.0.1",
     "reactify": "^1.1.1",
     "sassify": "^2.0.0",

@@ -29,7 +29,7 @@ gulp.task('react', function(){
             transform: [babelify.configure({presets: ["es2015", "react", "stage-1"]}), reactify],
             extensions: ['.jsx']
         }))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(rename(path.MINIFIED_OUT))
         .pipe(gulp.dest(path.DEST_JS_BUILD))
 });

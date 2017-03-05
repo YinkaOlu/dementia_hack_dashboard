@@ -3,6 +3,7 @@ const testData = [
     "createdAt": "Mon, March 4th, 2017",
     "title": "Random Instruction Test",
     "author": "Support Person One",
+      "tags": "dances",
     "steps": [
       {
         "title": "Step 1. Hammer Time",
@@ -26,6 +27,7 @@ const testData = [
     "createdAt": "Tues, March 5th, 2017",
     "title": "Random Instruction Test 2",
     "author": "Support Person Two",
+      "tags": "dances",
     "steps": [
       {
         "title": "Step 1. Hammer Time",
