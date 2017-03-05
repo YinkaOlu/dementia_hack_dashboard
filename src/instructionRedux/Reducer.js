@@ -56,6 +56,31 @@ const demoInstructions = [
                 }
             }
         ]
+    },
+    {
+        "id": 3,
+        "createdAt": "Tues, March 1th, 2017",
+        "title": "Random Instruction Test 3",
+        "author": "Support Person One",
+        "tags": "dances",
+        "steps": [
+            {
+                "title": "Step 1. Hammer Time",
+                "body": "Dance Randomly like a fool",
+                "media": {
+                    "audio": "",
+                    "video": ""
+                }
+            },
+            {
+                "title": "Step 2. Hit the NaeNae",
+                "body": "Do the whip, then the NaeNae",
+                "media": {
+                    "audio": "",
+                    "video": ""
+                }
+            }
+        ]
     }
 ];
 

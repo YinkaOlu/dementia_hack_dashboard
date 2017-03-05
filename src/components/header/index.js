@@ -24,7 +24,7 @@ class Header extends React.Component{
         return(
             <div>
                 <AppBar
-                    title="KIWI DASHBOARD"
+                    title="LAHNI Online"
                 />
                 <HeadTabs/>
                 <Drawer open={this.state.openSideBar} >
