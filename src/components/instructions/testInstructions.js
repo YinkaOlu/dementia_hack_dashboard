@@ -7,18 +7,20 @@ const testData = [
     "steps": [
       {
         "title": "Step 1. Hammer Time",
-        "body": "Dance Randomly like a fool",
+        "message": "Dance Randomly like a fool",
         "media": {
           "audio": "",
-          "video": ""
+          "video": "",
+            "picture": ""
         }
       },
       {
         "title": "Step 2. Hit the NaeNae",
         "body": "Do the whip, then the NaeNae",
-        "media": {
+        "message": {
           "audio": "",
-          "video": ""
+          "video": "",
+            "picture": ""
         }
       }
     ]
