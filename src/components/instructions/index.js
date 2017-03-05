@@ -8,8 +8,6 @@ import Dialog from 'material-ui/Dialog'
 import EditModal from './EditModal'
 import {connect} from 'react-redux'
 
-import testInstructions from "./testInstructions"
-
 class Instructions extends React.Component{
     constructor(props){
         super(props);
@@ -69,7 +67,7 @@ class Instructions extends React.Component{
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {testInstructions.map((instruction, index) =>
+                        {this.state.instructions.map((instruction, index) =>
                         {
                             return(
                                 <TableRow>
@@ -87,6 +85,6 @@ class Instructions extends React.Component{
     }
 }
 function mapStateToProps(state) {
-    return { storeState: state }
+    return { instructions: state.instructions }
 }
 export default connect(mapStateToProps)(Instructions);
