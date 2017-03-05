@@ -69,7 +69,13 @@ class StepInstructionComponent extends React.Component{
     editStepTitle(index, e){
         this.setState({selectedStep: index})
         let newSteps = this.state.steps;
-        newSteps[0].title = e.target.value
+        newSteps[0].title = e.target.value;
+        this.setState({steps: newSteps});
+    }
+    editStepMessage(index, e){
+        this.setState({selectedStep: index})
+        let newSteps = this.state.steps;
+        newSteps[0].message = e.target.value;
         this.setState({steps: newSteps});
     }
     render(){
@@ -88,6 +94,7 @@ class StepInstructionComponent extends React.Component{
                                 <TextField
                                     defaultValue={step.message}
                                     floatingLabelText="Step Message"
+                                    onChange={this.editStepMessage.bind(this, index)}
                                 />
                                 <br />
                                 <Chip>
