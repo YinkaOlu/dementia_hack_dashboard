@@ -4,6 +4,7 @@ import {editInstruction} from "./Actions"
 
 const demoInstructions = [
     {
+        "id": 1,
         "createdAt": "Mon, March 4th, 2017",
         "title": "Random Instruction Test",
         "author": "Support Person One",
@@ -13,25 +14,26 @@ const demoInstructions = [
                 "title": "Step 1. Hammer Time",
                 "message": "Dance Randomly like a fool",
                 "media": {
-                    "audio": "",
-                    "video": "",
-                    "picture": ""
+                    "audio": {name: "AudioTrack 1", data: null},
+                    "video": {name: "VideoTrack 1", data: null},
+                    "picture": {name: "Picture 1", data: null}
                 },
                 "failureCount": 100
             },
             {
                 "title": "Step 2. Hit the NaeNae",
-                "body": "Do the whip, then the NaeNae",
-                "message": {
-                    "audio": "",
-                    "video": "",
-                    "picture": ""
+                "message": "Do the whip, then the NaeNae",
+                "media": {
+                    "audio": {name: "AudioTrack 1", data: null},
+                    "video": {name: "VideoTrack 1", data: null},
+                    "picture": {name: "Picture 1", data: null}
                 },
                 "failureCount": 200
             }
         ]
     },
     {
+        "id": 2,
         "createdAt": "Tues, March 5th, 2017",
         "title": "Random Instruction Test 2",
         "author": "Support Person Two",

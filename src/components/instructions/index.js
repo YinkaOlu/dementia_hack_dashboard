@@ -45,6 +45,7 @@ class Instructions extends React.Component{
                     title="Edit Instructions"
                     actions={editActions}
                     modal={false}
+                    autoScrollBodyContent={true}
                     open={this.state.showModal}
                 >
                     <EditModal instruction={this.state.instruction}/>

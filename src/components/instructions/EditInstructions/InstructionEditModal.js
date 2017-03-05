@@ -1,11 +1,12 @@
 import React from 'react'
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
+import Divider from 'material-ui/Divider';
 
 export class BasicInstructionEdit extends React.Component{
     constructor(props){
         super(props);
-        this.state = {title: props.title, author: props.author, tags: props.tags}
+        this.state = {title: props.instruction.title, author: props.instruction.author, tags: props.instruction.tags,}
     }
     static defaultProps = {
         title: "New Title",
@@ -21,15 +22,15 @@ export class BasicInstructionEdit extends React.Component{
         return(
             <div>
                 <TextField
-                    hintText={this.state.title}
+                    defaultValue={this.state.title}
                     floatingLabelText="Instruction Title"
                 /><br />
                 <TextField
-                    hintText={this.state.author}
+                    defaultValue={this.state.author}
                     floatingLabelText="Author"
                 /><br />
                 <TextField
-                    hintText={this.state.tags}
+                    defaultValue={this.state.tags}
                     floatingLabelText="Instruction Tags"
                 /><br />
             </div>
@@ -40,7 +41,7 @@ export class BasicInstructionEdit extends React.Component{
 export class StepInstructionEdit extends React.Component{
     constructor(props){
         super(props);
-        this.state = {steps: props.steps}
+        this.state = {steps: props.instruction.steps, stepIndex: 0}
     }
     static defaultProps = {
         steps: [
@@ -54,29 +55,31 @@ export class StepInstructionEdit extends React.Component{
             }
         ],
     };
-    static propTypes = {
-        steps: React.PropTypes.array
-    };
     render(){
         return(
             <div>
-                {this.state.steps.map((step)=>{
-                    return(
-                        <div>
-                            <TextField
-                                hintText={step.title}
-                                floatingLabelText="Step Title"
-                            /><br />
-                            <TextField
-                                hintText={step.message}
-                                floatingLabelText="Step Message"
-                            />
-                            <Chip>
-                                {step.media.audio.name}
-                            </Chip>
-                        </div>
-                    )
-                })}
+                        {this.state.steps.map((step, index)=>{
+                            return(
+                            <div>
+                                <br />
+                                <TextField
+                                    defaultValue={step.title}
+                                    floatingLabelText="Step Title"
+                                />
+                                <br />
+                                <TextField
+                                    defaultValue={step.message}
+                                    floatingLabelText="Step Message"
+                                />
+                                <br />
+                                <Chip>
+                                    {step.media.audio.name}
+                                </Chip>
+                                <br />
+                                <Divider />
+                            </div>
+                            )
+                        })}
             </div>
         )
     }
