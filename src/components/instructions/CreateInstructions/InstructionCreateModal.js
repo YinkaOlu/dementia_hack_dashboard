@@ -27,18 +27,12 @@ const emptyStep = {
 class BasicInstructionComponent extends React.Component{
     constructor(props){
         super(props);
-        this.state = {title: props.instruction.title, author: props.instruction.author, tags: props.instruction.tags, instruction: emptyInstruction}
+        this.state = {
+            title: "",
+            author: "",
+            tags: ""
+        };
     }
-    static defaultProps = {
-        title: "New Title",
-        author: "Enter Author",
-        tags: "Enter instruction tags"
-    };
-    static propTypes = {
-        title: React.PropTypes.string,
-        author: React.PropTypes.string,
-        tags: React.PropTypes.string
-    };
     createStepTitle(e){
         let newInstruction = this.state.instruction;
         newInstruction.title = e.target.value;
@@ -58,18 +52,18 @@ class BasicInstructionComponent extends React.Component{
         return(
             <div>
                 <TextField
-                    hintText={this.state.title}
-                    floatingLabelText="Instruction Title"
+                    floatingLabelText="Describe Instruction in a few words"
+                    defaultValue={this.state.title}
                     onChange={this.createStepTitle.bind(this)}
                 /><br />
                 <TextField
-                    hintText={this.state.author}
                     floatingLabelText="Author"
+                    defaultValue={this.state.author}
                     onChange={this.createStepAuthor.bind(this)}
                 /><br />
                 <TextField
-                    hintText={this.state.tags}
-                    floatingLabelText="Instruction Tags"
+                    floatingLabelText="A few tags"
+                    defaultValue={this.state.tags}
                     onChange={this.createStepTags.bind(this)}
                 /><br />
             </div>
@@ -164,5 +158,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export const StepInstructionEdit = connect(mapStateToProps, mapDispatchToProps)(StepInstructionComponent);
-export const BasicInstructionEdit = connect(mapStateToProps, mapDispatchToProps)(BasicInstructionComponent);
+export const StepInstructionCreate = connect(mapStateToProps, mapDispatchToProps)(StepInstructionComponent);
+export const BasicInstructionCreate = connect(mapStateToProps, mapDispatchToProps)(BasicInstructionComponent);

@@ -7,7 +7,7 @@ import {
     StepContent,
 } from 'material-ui/Stepper';
 import FlatButton from 'material-ui/FlatButton';
-import {BasicInstructionEdit, StepInstructionEdit} from './CreateInstructions/InstructionCreateModal'
+import {BasicInstructionCreate, StepInstructionCreate} from './CreateInstructions/InstructionCreateModal'
 import {connect} from 'react-redux'
 
 class CreateModal extends React.Component{
@@ -64,6 +64,7 @@ class CreateModal extends React.Component{
                     <Step>
                         <StepLabel>Basic Instruction Info</StepLabel>
                         <StepContent>
+                            <BasicInstructionCreate/>
                             <FlatButton label="Go To Step 2" onClick={this.goToStep.bind(this)}/>
                         </StepContent>
                     </Step>
