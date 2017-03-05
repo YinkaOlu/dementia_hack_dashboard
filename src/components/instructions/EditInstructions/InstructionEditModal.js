@@ -81,3 +81,4 @@ export class StepInstructionEdit extends React.Component{
         )
     }
 }
+const random = StepInstructionEdit.state
