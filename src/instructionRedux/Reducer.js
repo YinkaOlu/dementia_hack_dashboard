@@ -6,9 +6,9 @@ const demoInstructions = [
     {
         "id": 1,
         "createdAt": "Mon, March 4th, 2017",
-        "title": "Random Instruction Test",
-        "author": "Support Person One",
-        "tags": "dances",
+        "title": "Make Gingerbread",
+        "author": "Aunt May",
+        "tags": "cooking, pastry, baking",
         "steps": [
             {
                 "title": "Step 1. Hammer Time",
@@ -35,9 +35,9 @@ const demoInstructions = [
     {
         "id": 2,
         "createdAt": "Tues, March 5th, 2017",
-        "title": "Random Instruction Test 2",
-        "author": "Support Person Two",
-        "tags": "dances",
+        "title": "How to use washing mashing",
+        "author": "Craig (Grandson)",
+        "tags": "washing, kitchen",
         "steps": [
             {
                 "title": "Step 1. Hammer Time",
@@ -60,9 +60,9 @@ const demoInstructions = [
     {
         "id": 3,
         "createdAt": "Tues, March 1th, 2017",
-        "title": "Random Instruction Test 3",
-        "author": "Support Person One90 ",
-        "tags": "dances",
+        "title": "Take nightly medication",
+        "author": "Matthew (Husband)",
+        "tags": "medical, routine",
         "steps": [
             {
                 "title": "Step 1. Hammer Time",
